@@ -264,32 +264,18 @@ def get_DIR_Nz(cat_spec, cat_photo, bands, zflag,
     dndz_jk = np.array(dndz_jk)
     return zz, dndz, dndz_jk
 
-def subtract_mono_and_dipole(hp_map, mask=None, bunch=24):
+def subtract_mono_and_dipole(hp_map, mask=None):
     """
     Remove monopole and dipole contributions to a map.
 
     Args:
         hp_map (array-like): healpix map
         mask (array-like): optional mask to apply before the dipole fit
-        bunch (int): number of pixels to process at once (set to default of the healpy original function)
 
+    Returns:
+        array-like: healpix map with monopole and dipole removed
     """
+    out_map = hp_map.copy()
     if mask is not None:
-        masked_map = hp_map.copy()
-        masked_map[mask < 1.] = hp.UNSEEN
-        mono, dipole = hp.fit_dipole(masked_map)
-
-        npix = len(masked_map)
-        nside = hp.npix2nside(npix)
-        bunchsize = npix // bunch
-        for ibunch in range(npix // bunchsize):
-            ipix = np.arange(ibunch * bunchsize, (ibunch + 1) * bunchsize)
-            ipix = ipix[(np.isfinite(hp_map[ipix]))]
-            x, y, z = hp.pix2vec(nside, ipix, False)
-            hp_map[ipix] -= dipole[0] * x
-            hp_map[ipix] -= dipole[1] * y
-            hp_map[ipix] -= dipole[2] * z
-            hp_map[ipix] -= mono
-        return hp_map
-    else:
-        return hp.remove_dipole(hp_map).data
+        out_map[mask==0.] = hp.UNSEEN
+    return hp.remove_dipole(out_map)
