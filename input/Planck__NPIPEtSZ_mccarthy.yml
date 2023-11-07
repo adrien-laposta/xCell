@@ -1,0 +1,12 @@
+mapper_class: MapperNPIPEtSZ_mccarthy
+file_map: /mnt/zfsusers/alaposta/tSZ_shear_correlations/data/mccarthy_data/maps/deproject_CMB_CIB_default_standard_full.fits
+file_hm1: /mnt/zfsusers/alaposta/tSZ_shear_correlations/data/mccarthy_data/maps/deproject_CIB_CMB_default_standard_RH1.fits
+file_hm2: /mnt/zfsusers/alaposta/tSZ_shear_correlations/data/mccarthy_data/maps/deproject_CIB_CMB_default_standard_RH2.fits
+file_gp_mask: /mnt/extraspace/damonge/Datasets/Planck_tSZ/COM_CompMap_YSZ_R2.02/COM_CompMap_Compton-SZMap-masks_2048_R2.01.fits
+file_ps_mask: /mnt/extraspace/damonge/Datasets/Planck_tSZ/COM_CompMap_YSZ_R2.02/COM_CompMap_Compton-SZMap-masks_2048_R2.01.fits
+gp_mask_mode: '0.6'
+ps_mask_mode: ['default']
+beam_info: 
+  - type: 'Gaussian'
+    FWHM_arcmin: 10.0
+mask_name: mask_NPIPEtSZ_mccarthy
